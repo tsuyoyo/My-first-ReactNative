@@ -1,60 +1,17 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import SampleAppContainer from './src/app/containers/SampleApp';
+import SampleAppReducer from './src/app/reducers/SampleAppReducer';
 
-const initialState = {
-  displayText : 'init state',
-};
+const store = createStore(SampleAppReducer);
 
-function textReducer(state = initialState, action) {
-  switch (action.type) {
-    case 'UPDATE_TEXT':
-      return {
-        ...state,
-        displayText: action.payload.displayText,
-      };
-    default:
-      return state;
-  }
-}
-
-const store = createStore(textReducer);
-
-const updateText = (text) => ({
-  type: 'UPDATE_TEXT',
-  payload: {
-    displayText: text,
-  }
-});
-
-export function SampleApp({ store }) {
-  const { displayText } = store.getState();
-  return(
-    <View>
-      <TextInput
-        onChangeText={(event) => store.dispatch(updateText(event.toString()))} />
-      <Text>{displayText}</Text>
-    </View>
-  );
-}
-
-// メモ: store.subscribe(() => render);に相当するものがないので、
-// ここでreact-reduxの出番
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <SampleApp store={store} />
-      </View>
+      <Provider store={store}>
+        <SampleAppContainer />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
