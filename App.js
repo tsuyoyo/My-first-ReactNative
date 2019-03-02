@@ -1,10 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import SampleAppContainer from './src/app/containers/SampleApp';
-import SampleAppReducer from './src/app/reducers/SampleAppReducer';
-
-const store = createStore(SampleAppReducer);
+import store from './src/app/store';
 
 export default class App extends React.Component {
   render() {

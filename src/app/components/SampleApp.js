@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 export default function SampleApp(
   {
     displayText,
-    updateText
+    updateTextAsync
   }
 ) {
   return(
@@ -27,7 +27,7 @@ export default function SampleApp(
       <TextInput
         style={styles.textInput}
         placeholder='Input text here'
-        onChangeText={(event) => updateText(event.toString())} />
+        onChangeText={(event) => updateTextAsync(event.toString())} />
       <Text style={styles.textView}>
         {displayText}
       </Text>

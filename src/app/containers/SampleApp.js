@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SampleApp from '../components/SampleApp';
-import ActionCreator from '../actioncreators/SampleAppActionCreator';
+import * as actionCreator from '../actioncreators/SampleAppActionCreator';
 
 function mapStateToProps(state) {
   const { displayText } = state;
@@ -11,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateText(text) { // is to be part of props
-      dispatch(ActionCreator.updateText(text)); // dispatching updateText action
+    updateTextAsync(text) { // is to be part of props
+      dispatch(actionCreator.updateTextAsync(text));
     }
   };
 }
