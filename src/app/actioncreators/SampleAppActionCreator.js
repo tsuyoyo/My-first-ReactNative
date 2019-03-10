@@ -7,13 +7,16 @@ export function updateText(text) {
       displayText: text,
     }
   };
-};
+}
 
-// TODO : Write test!!!!!
-export function updateTextAsync(text) {
-  return (dispatch, getState) => {
-    setTimeout(() => {
-      dispatch(updateText(text));
-    }, 2000);
+export function showLoading() {
+  return {
+    type: Actions.SHOW_LOADING,
   };
-};
+}
+
+export function dismissLoading() {
+  return {
+    type: Actions.DISMISS_LOADING,
+  };
+}

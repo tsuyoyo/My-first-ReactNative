@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import LineList from './lineslist/LineList';
+import PrefecturePicker from './prefecturepicker/PrefecturePicker';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,19 +20,22 @@ const styles = StyleSheet.create({
 
 export default function SampleApp(
   {
-    displayText,
-    updateTextAsync
+    lines,
+    selectedPrefecture,
+    updateTextAsync,
+    selectPrefecture,
   }
 ) {
   return(
-    <View style={styles.container}>
-      <TextInput
-        style={styles.textInput}
-        placeholder='Input text here'
-        onChangeText={(event) => updateTextAsync(event.toString())} />
-      <Text style={styles.textView}>
-        {displayText}
-      </Text>
+    // memo : 選択されている県もstoreに状態として持っておかないとうまくいかないかも
+    <View>
+      <PrefecturePicker
+        onPrefectureSelected={id => updateTextAsync(id)}
+        selectedPrefecture={selectedPrefecture}
+        onSelectPrefecture={prefecture => selectPrefecture(prefecture)} />
+      <ScrollView>
+        <LineList lines={lines} />
+      </ScrollView>
     </View>
   );
 }
